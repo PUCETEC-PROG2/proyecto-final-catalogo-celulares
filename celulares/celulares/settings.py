@@ -76,8 +76,12 @@ WSGI_APPLICATION = 'celulares.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'catalogo_celular',
+        'HOST': 'localhost',
+        'PORT': '5432',
+        'USER': 'postgres',
+        'PASSWORD': '1234'
     }
 }
 
@@ -118,7 +122,16 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+#Media Files
+MEDIA_URL = 'media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Configuración de login
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+LOGIN_URL = 'catalogo_celular:login'

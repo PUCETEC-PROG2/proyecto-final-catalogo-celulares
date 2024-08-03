@@ -21,7 +21,7 @@ from catalogo_celular import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('celulares.urls')),
+    path('', include('catalogo_celular.urls')),
     path('accounts/',include('django.contrib.auth.urls')),
 ]
 
