@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static 
-from catalogo_celular import settings
+from catalogo_celular import urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),

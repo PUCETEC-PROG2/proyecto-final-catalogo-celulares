@@ -10,11 +10,11 @@ from django.template import loader
 # from django.contrib.auth.views import LoginView
 # from django.contrib.auth.decorators import login_required
 
-def index(request):
-    #pokemons = Pokemon.objects.all() ## SELECT * FROM pokedex_pokemon
+#def index(request):
+   #pokemons = Pokemon.objects.all() ## SELECT * FROM pokedex_pokemon
    ## SELECT * FROM pokedex_pokemon ORD
-    template = loader.get_template('index.html')
-    return HttpResponse(template.render({'index': index}, request))
+#    template = loader.get_template('index.html')
+#    return HttpResponse(template.render({'index': index}, request))
 
  
 # def pokemon(request, pokemon_id):
@@ -40,7 +40,7 @@ def index(request):
         
 #     return render(request,"add_pokemon.html",{'form': form }) 
 
-class CustomLoginView(LoginView):
-    template_name="login.html"
+#class CustomLoginView(LoginView):
+#    template_name="login.html"
        
 
