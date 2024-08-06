@@ -1,6 +1,9 @@
 
 from django.http import HttpResponse
+from django.shortcuts import render
 from django.template import loader
+
+from .models import *
 
 # from pokedex.forms import PokemonFor
 # from .models import Pokemon
@@ -10,12 +13,19 @@ from django.template import loader
 # from django.contrib.auth.views import LoginView
 # from django.contrib.auth.decorators import login_required
 
-#def index(request):
+def index(request):
    #pokemons = Pokemon.objects.all() ## SELECT * FROM pokedex_pokemon
    ## SELECT * FROM pokedex_pokemon ORD
-#    template = loader.get_template('index.html')
-#    return HttpResponse(template.render({'index': index}, request))
+    template = loader.get_template('index.html')
+    return HttpResponse(template.render({'index': index}, request))
 
+def productos(request):
+    productos = Producto.objects.order_by('categoria')
+    #productos = Producto.objects.all()
+    context = {
+        'productos' : productos
+    }
+    return render(request, 'productos.html', context)
  
 # def pokemon(request, pokemon_id):
 #     #SELECT * FROM pokedex_pokemon WHERE id='pokemon_id'

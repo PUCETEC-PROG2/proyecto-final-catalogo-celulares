@@ -3,11 +3,13 @@
 {% block title %}Inicio{% endblock title %}
 
 {% block content %}
-<div class="jumbotron">
-    <h1 class="display-4">Bienvenido al Catálogo de Celulares</h1>
-    <p class="lead">Esta es tu aplicación para gestionar clientes, productos y compras de celulares.</p>
-    <hr class="my-4">
-    <p>Utiliza los enlaces de navegación para explorar y administrar el catálogo.</p>
-    <a class="btn btn-primary btn-lg" href="{% url 'lista_productos' %}" role="button">Ver Productos</a>
+<div class="container">
+    <div class="jumbotron">
+        <h1 class="display-4">Bienvenido al Catálogo de Celulares</h1>
+        <p class="lead">Esta es tu aplicación para gestionar clientes, productos y compras de celulares.</p>
+        <hr class="my-4">
+        <p>Utiliza los enlaces de navegación para explorar y administrar el catálogo.</p>
+        {% comment %} <a class="btn btn-primary btn-lg" href="{% url 'lista_productos' %}" role="button">Ver Productos</a> {% endcomment %}
+    </div>
 </div>
 {% endblock content %}
