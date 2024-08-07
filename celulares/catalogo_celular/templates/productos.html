@@ -1,59 +1,63 @@
-{% extends "base.html" %}
-
-{% block title %}Productos{% endblock title %}
+{% extends "base.html" %} 
+{% block title %}Productos{% endblock title %} 
 {% block content %}
-<div class="container-fluid">
-    <div class="card">
-        <div class="card-body">
-            <div class="table-responsive px-3">
-                <table class="table table-sm table-bordered border-primary">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-body ">
+                <div class="table-responsive">
+                    <table class="table table-bordered align-middle">
                     <thead class="table-dark text-center">
-                        <tr>
-                            <th scope="col">ID</th>
-                            <th scope="col">Nombre</th>
-                            <th scope="col">Marca</th>
-                            <th scope="col">Precio</th>
-                            <th scope="col">Procesador</th>
-                            <th scope="col">Pantalla</th>
-                            <th scope="col">RAM</th>
-                            <th scope="col">Cámara</th>
-                            <th scope="col">Almacenamiento</th>
-                            <th scope="col">Categoría</th>
-                            <th scope="col">Editar</th>
-                            <th scope="col">Eliminar</th>
+                        <tr class="align-middle">
+                        <th scope="col">ID</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Marca</th>
+                        <th scope="col">Precio</th>
+                        <th scope="col">Procesador</th>
+                        <th scope="col">Pantalla</th>
+                        <th scope="col">RAM</th>
+                        <th scope="col">Cámara</th>
+                        <th scope="col">Almacenamiento</th>
+                        <th scope="col">Categoría</th>
+                        <th scope="col">Editar</th>
+                        <th scope="col">Eliminar</th>
                         </tr>
                     </thead>
-                    <tbody class="text-center">
+                    <tbody class="text-center align-middle">
                         {% for producto in productos %}
-                        <tr>
-                            <th scope="row">{{ producto.id }}</th>
-                            <td>{{ producto.nombre_producto }}</td>
-                            <td>{{ producto.precio }}</td>
-                            <td>{{ producto.marca }}</td>
-                            <td>{{ producto.procesador }}</td>
-                            <td>{{ producto.pantalla }}</td>
-                            <td>{{ producto.ram }}</td>
-                            <td>{{ producto.camara }}</td>
-                            <td>{{ producto.almacenamiento }}</td>
-                            <td>{{ producto.categoria }}</td>
-                            {% if user.is_authenticated %}
-                            <td>
-                                <a href="" class="btn btn-sm btn-warning">
-                                    <i class="fa-solid fa-pencil"></i>
-                                </a>
-                            </td>
-                            <td>
-                                <a href="" class="btn btn-sm btn-danger">
-                                    <i class="fa-solid fa-trash"></i>
-                                </a>
-                            </td>
-                            {% endif %}
+                        <tr class="align-middle">
+                        <th scope="row">{{ producto.id }}</th>
+                        <td>{{ producto.nombre_producto }}</td>
+                        <td>{{ producto.precio }}</td>
+                        <td>{{ producto.marca }}</td>
+                        <td>{{ producto.procesador }}</td>
+                        <td>{{ producto.pantalla }}</td>
+                        <td>{{ producto.ram }}</td>
+                        <td>{{ producto.camara }}</td>
+                        <td>{{ producto.almacenamiento }}</td>
+                        <td>{{ producto.categoria }}</td>
+                        {% if user.is_authenticated %}
+                        <td>
+                            <a href="editar_producto/{{ producto.id }}" class="btn btn-sm btn-warning" id="btn_editar_producto">
+                            <i class="fa-solid fa-pencil"></i>
+                            </a>
+                        </td>
+                        <td>
+                            <a href="eliminar_producto/{{ producto.id }}" class="btn btn-sm btn-danger" onclick="return confirmarEliminacion()">
+                            <i class="fa-solid fa-trash"></i>
+                            </a>
+                        </td>
+                        {% endif %}
                         </tr>
                         {% endfor %}
                     </tbody>
-                </table>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
-</div>
+    <script>
+        function confirmarEliminacion() {
+            return confirm('¿Estás seguro de que deseas eliminar este producto?');
+        }
+    </script>
 {% endblock content %}

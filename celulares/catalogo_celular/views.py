@@ -1,7 +1,9 @@
 
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.template import loader
+
+from .forms import *
 
 from .models import *
 
@@ -36,19 +38,35 @@ def productos(request):
 #     }
 #     return HttpResponse(template.render(context, request))
 
-# @login_required    
-# def add_pokemon(request):
-#     if request.method=='POST':
-#         form= PokemonFor(request.POST ,request.FILES)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('pokedex:index')
+#@login_required    
+def agregar_producto(request):
+    if request.method=='POST':
+        form= ProductoForm(request.POST ,request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('pokedex:index')
         
-#     else:
+    else:   
+        form = ProductoForm()
+        
+    return render(request,"productos_form.html",{'form': form }) 
+
+def editar_producto(request, id):
+    producto = get_object_or_404(Producto, pk = id)
+    if request.method == 'POST':
+        form = ProductoForm(request.POST, request.FILES, instance=producto)
+        if form.is_valid():
+            form.save()
+            return redirect('catalogo_celular:productos')
+    else:
+        form = ProductoForm(instance=producto)
     
-#         form = PokemonFor()
-        
-#     return render(request,"add_pokemon.html",{'form': form }) 
+    return render(request, 'productos_form.html', {'form': form})
+
+def eliminar_producto(required, id):
+    producto = get_object_or_404(Producto, pk = id)
+    producto.delete()
+    return redirect('catalogo_celular:productos')
 
 #class CustomLoginView(LoginView):
 #    template_name="login.html"

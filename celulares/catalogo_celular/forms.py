@@ -1,0 +1,18 @@
+from django import forms
+from .models import *
+
+class ProductoForm(forms.ModelForm):
+    class Meta:
+        model = Producto
+        fields = '__all__'
+        widgets = {
+           'nombre_producto' : forms.TextInput(attrs={'class' : 'form-control'}),
+           'precio' : forms.NumberInput(attrs={'class' : 'form-control'}),
+           'marca' : forms.TextInput(attrs={'class' : 'form-control'}),
+           'procesador' : forms.Textarea(attrs={'class' : 'form-control'}),
+           'pantalla' : forms.Textarea(attrs={'class' : 'form-control'}),
+           'ram' : forms.NumberInput(attrs={'class' : 'form-control'}),
+           'camara' : forms.Textarea(attrs={'class' : 'form-control'}),
+           'almacenamiento' : forms.NumberInput(attrs={'class' : 'form-control'}),
+           'categoria' : forms.Select(attrs={'class' : 'form-control'})
+        }
