@@ -16,3 +16,16 @@ class ProductoForm(forms.ModelForm):
            'almacenamiento' : forms.NumberInput(attrs={'class' : 'form-control'}),
            'categoria' : forms.Select(attrs={'class' : 'form-control'})
         }
+
+class CompraForm(forms.ModelForm):
+    class Meta:
+        model = Compra
+        fields = '__all__'
+        widgets = {
+           'ciudad' : forms.TextInput(attrs={'class' : 'form-control'}),
+           'fecha_compra' : forms.DateInput(attrs={'class' : 'form-control'}),
+           'precio_total' : forms.NumberInput(attrs={'class' : 'form-control'}),
+           'cantidad' : forms.NumberInput(attrs={'class' : 'form-control'}),
+           'cliente' : forms.Select(attrs={'class' : 'form-control'}),
+           'productos' : forms.Select(attrs={'class' : 'form-control'}),
+        }

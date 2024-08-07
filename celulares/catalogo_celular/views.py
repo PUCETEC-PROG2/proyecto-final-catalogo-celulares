@@ -28,15 +28,6 @@ def productos(request):
         'productos' : productos
     }
     return render(request, 'productos.html', context)
- 
-# def pokemon(request, pokemon_id):
-#     #SELECT * FROM pokedex_pokemon WHERE id='pokemon_id'
-#     pokemon = Pokemon.objects.get(id=pokemon_id)
-#     template = loader.get_template('display_pokemon.html')
-#     context = {
-#         'pokemon': pokemon
-#     }
-#     return HttpResponse(template.render(context, request))
 
 #@login_required    
 def agregar_producto(request):
@@ -67,6 +58,27 @@ def eliminar_producto(required, id):
     producto = get_object_or_404(Producto, pk = id)
     producto.delete()
     return redirect('catalogo_celular:productos')
+
+def compras(request):
+    compras = Compra.objects.order_by('fecha_compra')
+    #productos = Producto.objects.all()
+    context = {
+        'compras' : compras
+    }
+    return render(request, 'compras.html', context)
+
+#@login_required    
+def agregar_compra(request):
+    if request.method=='POST':
+        form= CompraForm(request.POST ,request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('catalogo_celular:compras')
+        
+    else:   
+        form = ProductoForm()
+        
+    return render(request,"compras_form.html",{'form': form }) 
 
 #class CustomLoginView(LoginView):
 #    template_name="login.html"
