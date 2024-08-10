@@ -21,7 +21,7 @@ def index(request):
     template = loader.get_template('index.html')
     return HttpResponse(template.render({'index': index}, request))
 
-@login_required
+
 def productos(request):
     productos = Producto.objects.order_by('categoria')
     #productos = Producto.objects.all()
@@ -29,6 +29,8 @@ def productos(request):
         'productos' : productos
     }
     return render(request, 'productos.html', context)
+
+
 
 #@login_required    
 def agregar_producto(request):
@@ -80,6 +82,46 @@ def agregar_compra(request):
         form = ProductoForm()
         
     return render(request,"compras_form.html",{'form': form }) 
+
+
+def clientes (request):
+    clientes = Cliente.objects.all()
+    context = {
+        'clientes' : clientes 
+    }
+    return render(request,'clientes.html', context )
+
+def agregar_cliente(request):
+    if request.method=='POST':
+        form= ClienteForm(request.POST ,request.FILES) 
+        if form.is_valid():
+            form.save()
+            return redirect('catalogo_celular:index')
+        
+    else:   
+        form = ClienteForm()
+        
+    return render(request,"clientes_form.html",{'form': form }) 
+
+def editar_cliente(request, id):
+    cliente = get_object_or_404(Producto, pk = id)
+    if request.method == 'POST':
+        form = ClienteForm(request.POST, request.FILES, instance=cliente)
+        if form.is_valid():
+            form.save()
+            return redirect('catalogo_celular:clientes')
+    else:
+        form = ClienteForm(instance=cliente)
+    
+    return render(request, 'clientes_form.html', {'form': form})
+
+def eliminar_cliente(required, id):
+    cliente = get_object_or_404(Producto, pk = id)
+    cliente.delete()
+    return redirect('catalogo_celular:clientes')
+
+
+
 
 class CustomLoginView(LoginView):
    template_name="login.html"

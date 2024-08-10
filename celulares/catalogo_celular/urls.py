@@ -12,6 +12,10 @@ urlpatterns = [
 
     path("compras/", views.compras, name="compras"),
 
+    path("clientes/", views.clientes, name="clientes"),
+    path("clientes/editar_cliente/<int:id>/", views.editar_cliente, name="editar_cliente"),
+    path("clientes/eliminar_cliente/<int:id>/", views.eliminar_cliente, name="eliminar_cliente"),
+
     # path("add_pokemon/", views.add_pokemon, name="add_pokemon"),
     path("login/", views.CustomLoginView.as_view(), name="login"),
 ]

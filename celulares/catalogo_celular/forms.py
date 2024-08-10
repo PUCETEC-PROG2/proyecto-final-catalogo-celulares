@@ -29,3 +29,17 @@ class CompraForm(forms.ModelForm):
            'cliente' : forms.Select(attrs={'class' : 'form-control'}),
            'productos' : forms.Select(attrs={'class' : 'form-control'}),
         }
+
+class ClienteForm(forms.ModelForm):
+    class Meta:
+        model = Cliente
+        fields = '__all__'
+        widgets = {
+           'nombre' : forms.TextInput(attrs={'class' : 'form-control'}),
+           'apellidos' : forms.TextInput(attrs={'class' : 'form-control'}),
+           'edad' : forms.NumberInput(attrs={'class' : 'form-control'}),
+           'cedula' : forms.NumberInput(attrs={'class' : 'form-control'}),
+           'telefono' : forms.NumberInput(attrs={'class' : 'form-control'}),
+           'correo' : forms.Textarea(attrs={'class' : 'form-control'}),
+           
+        }        
