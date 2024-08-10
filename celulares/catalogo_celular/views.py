@@ -9,11 +9,11 @@ from .models import *
 
 # from pokedex.forms import PokemonFor
 # from .models import Pokemon
-# from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render
 
 # #importacion de librearia de autenticacion 
-# from django.contrib.auth.views import LoginView
-# from django.contrib.auth.decorators import login_required
+from django.contrib.auth.views import LoginView
+from django.contrib.auth.decorators import login_required
 
 def index(request):
    #pokemons = Pokemon.objects.all() ## SELECT * FROM pokedex_pokemon
@@ -21,6 +21,7 @@ def index(request):
     template = loader.get_template('index.html')
     return HttpResponse(template.render({'index': index}, request))
 
+@login_required
 def productos(request):
     productos = Producto.objects.order_by('categoria')
     #productos = Producto.objects.all()
@@ -80,7 +81,7 @@ def agregar_compra(request):
         
     return render(request,"compras_form.html",{'form': form }) 
 
-#class CustomLoginView(LoginView):
-#    template_name="login.html"
+class CustomLoginView(LoginView):
+   template_name="login.html"
        
 
