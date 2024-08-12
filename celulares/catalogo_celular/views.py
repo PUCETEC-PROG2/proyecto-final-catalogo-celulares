@@ -30,7 +30,12 @@ def productos(request):
     }
     return render(request, 'productos.html', context)
 
-
+def detalle_producto(request, id):
+    producto = Producto.objects.get(id=id)
+    context = {
+        'producto': producto
+    }
+    return render(request, 'detalle_producto.html', context)
 
 #@login_required    
 def agregar_producto(request):
@@ -38,7 +43,7 @@ def agregar_producto(request):
         form= ProductoForm(request.POST ,request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('pokedex:index')
+            return redirect('catalogo_celular:productos')
         
     else:   
         form = ProductoForm()
@@ -104,7 +109,7 @@ def agregar_cliente(request):
     return render(request,"clientes_form.html",{'form': form }) 
 
 def editar_cliente(request, id):
-    cliente = get_object_or_404(Producto, pk = id)
+    cliente = get_object_or_404(Cliente, pk = id)
     if request.method == 'POST':
         form = ClienteForm(request.POST, request.FILES, instance=cliente)
         if form.is_valid():
@@ -116,7 +121,7 @@ def editar_cliente(request, id):
     return render(request, 'clientes_form.html', {'form': form})
 
 def eliminar_cliente(required, id):
-    cliente = get_object_or_404(Producto, pk = id)
+    cliente = get_object_or_404(Cliente, pk = id)
     cliente.delete()
     return redirect('catalogo_celular:clientes')
 

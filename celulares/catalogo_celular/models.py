@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import MinValueValidator
 
 # Create your models here.
 
@@ -22,12 +23,14 @@ class Producto(models.Model):
     nombre_producto = models.CharField(max_length=200, null=False)
     precio = models.DecimalField(null=False, max_digits=7, decimal_places=2)
     marca = models.CharField(max_length=100, null=False)
+    cantidad = models.IntegerField(null=False, validators=[MinValueValidator(0)])
     procesador = models.CharField(max_length=100, null=False)
     pantalla = models.TextField(max_length=200, null=False)
     ram = models.IntegerField(null=False)
     camara = models.TextField(max_length=300, null=False)
     almacenamiento = models.IntegerField(null=False)
     categoria = models.ForeignKey(Categoria, on_delete=models.RESTRICT)
+    imagen = models.ImageField(upload_to='celulares_images', null=False)
 
     def __str__(self) -> str:
         return self.nombre_producto
@@ -36,7 +39,6 @@ class Compra(models.Model):
     ciudad = models.CharField(max_length=50, null=False)
     fecha_compra = models.DateField(null=False)
     precio_total = models.DecimalField(null=False, max_digits=10, decimal_places=2)
-    cantidad = models.IntegerField(default=1, null=False)
     cliente = models.ForeignKey(Cliente, on_delete=models.RESTRICT)
     productos = models.ManyToManyField(Producto)
 

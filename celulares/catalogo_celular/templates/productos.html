@@ -12,14 +12,13 @@
                         <th scope="col">Nombre</th>
                         <th scope="col">Marca</th>
                         <th scope="col">Precio</th>
-                        <th scope="col">Procesador</th>
-                        <th scope="col">Pantalla</th>
-                        <th scope="col">RAM</th>
-                        <th scope="col">Cámara</th>
-                        <th scope="col">Almacenamiento</th>
+                        <th scope="col">Stock</th>
                         <th scope="col">Categoría</th>
+                        <th scope="col">Detalles</th>
+                        {% if user.is_authenticated %}
                         <th scope="col">Editar</th>
                         <th scope="col">Eliminar</th>
+                        {% endif %}
                         </tr>
                     </thead>
                     <tbody class="text-center align-middle">
@@ -27,14 +26,15 @@
                         <tr class="align-middle">
                         <th scope="row">{{ producto.id }}</th>
                         <td>{{ producto.nombre_producto }}</td>
-                        <td>{{ producto.precio }}</td>
                         <td>{{ producto.marca }}</td>
-                        <td>{{ producto.procesador }}</td>
-                        <td>{{ producto.pantalla }}</td>
-                        <td>{{ producto.ram }}</td>
-                        <td>{{ producto.camara }}</td>
-                        <td>{{ producto.almacenamiento }}</td>
+                        <td>{{ producto.precio }}</td>
+                        <td>{{ producto.cantidad }}</td>
                         <td>{{ producto.categoria }}</td>
+                        <td>
+                            <a href="detalle_producto/{{ producto.id }}" class="btn btn-sm btn-primary" id="btn_editar_producto">
+                                <i class="fa-solid fa-eye"></i>
+                            </a>
+                        </td>
                         {% if user.is_authenticated %}
                         <td>
                             <a href="editar_producto/{{ producto.id }}" class="btn btn-sm btn-warning" id="btn_editar_producto">
