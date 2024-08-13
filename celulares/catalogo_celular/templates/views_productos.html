@@ -1,0 +1,36 @@
+{% extends "base.html" %} 
+{% block title %}Modelos{% endblock title %} 
+{% block content %}
+<h1 class="p-2" >MODELOS DE CELULARES A ESCOGER</h1>
+    
+<div class="card-group">
+
+    {%for producto in productos%}
+        <div class="card">
+
+            <img src="{{producto.imagen.url }}" alt="">
+            <div class="card-body"></div>
+            <h4 class="card-title">{{producto}}</h4>
+            <p class="card-text">
+                Nombre: {{producto.nombre_producto}} <br>
+                Precio: {{producto.precio}} <br>
+                Marca:  {{producto.marca}} <br>
+                Procesador: {{producto.procesador}} <br>
+                Ram: {{producto.ram}} <br>
+                Camara: {{producto.camara}} <br>
+                Almacenamiento: {{producto.almacenamiento}} <br>
+
+
+
+            </p>
+            
+        </div>
+    {%endfor%}
+</div>
+
+
+
+
+{% endblock content %}
+
+

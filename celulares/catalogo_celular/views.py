@@ -37,6 +37,16 @@ def detalle_producto(request, id):
     }
     return render(request, 'detalle_producto.html', context)
 
+def views_productos(request):
+    
+    producto = Producto.objects
+    context = {
+        'producto': producto 
+    }
+    return render(request, 'views_productos.html', context)
+
+
+
 #@login_required    
 def agregar_producto(request):
     if request.method=='POST':
@@ -84,7 +94,7 @@ def agregar_compra(request):
             return redirect('catalogo_celular:compras')
         
     else:   
-        form = ProductoForm()
+        form = CompraForm()
         
     return render(request,"compras_form.html",{'form': form }) 
 

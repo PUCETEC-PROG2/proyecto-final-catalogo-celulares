@@ -42,6 +42,10 @@
                 <li class="nav-item">
                   <a class="nav-link" href="{% url 'catalogo_celular:productos' %}">Productos</a>
                 </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'catalogo_celular:views_productos' %}">Modelos</a>
+                </li>
+                
                 {% if user.is_authenticated %}
                 <li class="nav-item">
                   <a class="nav-link" href="{% url 'catalogo_celular:compras' %}">Compras</a>
@@ -54,6 +58,9 @@
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="{% url 'catalogo_celular:agregar_producto' %}">Agregar un producto</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'catalogo_celular:agregar_compra' %}">Agregar una compra</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="{% url "logout" %}">Logout</a>
