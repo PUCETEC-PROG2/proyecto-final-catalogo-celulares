@@ -37,13 +37,6 @@ def detalle_producto(request, id):
     }
     return render(request, 'detalle_producto.html', context)
 
-def views_productos(request):
-    
-    producto = Producto.objects
-    context = {
-        'producto': producto 
-    }
-    return render(request, 'views_productos.html', context)
 
 
 
