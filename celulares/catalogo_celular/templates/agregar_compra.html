@@ -27,7 +27,6 @@
                         <div style="flex: 2;"><strong>Cantidad</strong></div>
                         <div style="flex: 2;"><strong>Total</strong></div>
                     </div>
-                    {% for producto in productos %}{% endfor %}
                     <div class="row">
                         <div style="flex: 2;"><img src="{{ producto.imagen.url }}" alt=""></div>
                         <div style="flex: 2;"><strong>{{ producto.nombre_producto }}</strong></div>
@@ -36,7 +35,6 @@
                             <div class="row">
                                 <div class="col-lg-2"><p>{{ producto.cantidad }}</p></div>
                                 <div class="col-lg-4"><i class="fa-solid fa-caret-up me-2"></i><i class="fa-solid fa-caret-down"></i></div>
-                               
                             </div>
                         </div>
                         <div style="flex: 2;">$300</div>

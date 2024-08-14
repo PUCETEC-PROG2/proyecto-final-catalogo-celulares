@@ -66,23 +66,6 @@ def add_to_buy(request, id):
     carrito.agregar(producto)
     return redirect('catalogo_celular:productos')
 
-def delete_to_buy(request, id):
-    carrito = Carrito(request)
-    producto = Producto.objects.get(id=id)
-    carrito.eliminar_compra(producto)
-    return redirect('catalogo_celular:productos')
-
-def subtract_to_buy(request, id):
-    carrito = Carrito(request)
-    producto = Producto.objects.get(id=id)
-    carrito.restar(producto)
-    return redirect('catalogo_celular:productos')
-
-def clean_to_buy(request):
-    carrito = Carrito(request)
-    carrito.limpiar()
-    return redirect('catalogo_celular:productos')
-
 def editar_producto(request, id):
     producto = get_object_or_404(Producto, pk = id)
     if request.method == 'POST':
@@ -114,7 +97,24 @@ def agregar_compra(request):
     context = {
         'productos': productos
     }
-    return render(request, 'buy.html', context)
+    return render(request, 'agregar_compra.html', context)
+
+def delete_to_buy(request, id):
+    carrito = Carrito(request)
+    producto = Producto.objects.get(id=id)
+    carrito.eliminar_compra(producto)
+    return redirect('catalogo_celular:productos')
+
+def subtract_to_buy(request, id):
+    carrito = Carrito(request)
+    producto = Producto.objects.get(id=id)
+    carrito.restar(producto)
+    return redirect('catalogo_celular:productos')
+
+def clean_to_buy(request):
+    carrito = Carrito(request)
+    carrito.limpiar()
+    return redirect('catalogo_celular:productos')
 
 def checkout(request):
     compra = Compra.objects
