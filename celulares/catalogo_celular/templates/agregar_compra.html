@@ -7,10 +7,10 @@
                 <div class="card">
                     <div class="card-body">
                         <a href="{% url 'catalogo_celular:productos' %}" class="btn btn-dark mb-4">Continuar comprando</a>
-                        <table class="table">
+                        <table class="table table-bordered">
                             <tr>
-                                <th><h5>Productos: <strong>3</strong></h5></th>
-                                <th><h5>Total: <strong>$300</strong></h5></th>
+                                <th><h5>Productos: <strong>{{ request.session.compra|length }}</strong></h5></th>
+                                <th><h5>Total: <strong>$ {{ total_compra }}</strong></h5></th>
                                 <th>
                                     <a href="{% url 'catalogo_celular:checkout' %}" class="btn btn-success mb-4">Realizar Compra</a>
                                 </th>
@@ -20,25 +20,44 @@
                 </div>
                 <br>
                 <div class="card">
-                    <div class="row">
+                    <div class="row py-4">
                         <div style="flex: 2;"></div>
                         <div style="flex: 2;"><strong>Producto</strong></div>
                         <div style="flex: 2;"><strong>Precio</strong></div>
                         <div style="flex: 2;"><strong>Cantidad</strong></div>
-                        <div style="flex: 2;"><strong>Total</strong></div>
                     </div>
+                    {% if request.session.compra.items %}
+                    {% for key, value in request.session.compra.items  %}
                     <div class="row">
-                        <div style="flex: 2;"><img src="{{ producto.imagen.url }}" alt=""></div>
-                        <div style="flex: 2;"><strong>{{ producto.nombre_producto }}</strong></div>
-                        <div style="flex: 2;">{{ producto.precio }}</div>
+                        
+                        <div style="flex: 2;"><img src="{{ value.imagen.url }}" alt=""></div>
+                        <div style="flex: 2;"><strong>{{ value.nombre }}</strong></div>
+                        <div style="flex: 2;">{{ value.precio }}</div>
                         <div style="flex: 2;">
                             <div class="row">
-                                <div class="col-lg-2"><p>{{ producto.cantidad }}</p></div>
-                                <div class="col-lg-4"><i class="fa-solid fa-caret-up me-2"></i><i class="fa-solid fa-caret-down"></i></div>
+                                <div class="col-lg-2"><p>{{ value.cantidad }}</p></div>
+                                <div class="col-lg-3">
+                                    <a href="#" class="btn"><i class="fa-solid fa-caret-up me-2"></i></a>
+                                    <a href="#" class="btn"><i class="fa-solid fa-caret-down"></i></a>
+                                </div>
                             </div>
                         </div>
                         <div style="flex: 2;">$300</div>
+                        {% endfor %}
+                        {% else %}
+                        <div class="alert alert-danger text-center"><strong>Sin productos</strong></div>
+                        {% endif %}
+                        <div class="col-12 col-lg-5 mb-3 text-center mx-auto">
+                            <div class="card bg-success text-white">
+                                <h5><strong>Total:</strong></h5>
+                                <div style="flex: 2;"><strong>$ {{ total_compra }}</strong></div>
+                            </div>
+                        </div>
                     </div>
+                </div>
+                <div class="row text-center">
+                    <div class="col-6"><a href="#"></a></div>
+                    <div class="col-6"><a href="#"></a></div>
                 </div>
             </div>
         </div>

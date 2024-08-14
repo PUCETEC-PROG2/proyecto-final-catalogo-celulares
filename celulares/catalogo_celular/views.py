@@ -86,7 +86,7 @@ def compras(request):
 
 #@login_required    
 def agregar_compra(request):
-    productos = Producto.objects
+    productos = Producto.objects.all()
     context = {
         'productos': productos
     }

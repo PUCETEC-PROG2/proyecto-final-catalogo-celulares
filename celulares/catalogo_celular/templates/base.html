@@ -23,56 +23,50 @@
     ></script>
   </head>
   <body>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-5">
-          <div class="container">
-            <a class="navbar-brand" href="{% url 'catalogo_celular:index' %}">Inicio</a>
-            <button
-              class="navbar-toggler"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbarText"
-              aria-controls="navbarText"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarText">
-              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                  <a class="nav-link" href="{% url 'catalogo_celular:productos' %}">Productos</a>
-                </li>
-                
-                
-                {% if user.is_authenticated %}
-                <li class="nav-item">
-                  <a class="nav-link" href="{% url 'catalogo_celular:compras' %}">Compras</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="{% url 'catalogo_celular:clientes' %}">Clientes</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="{% url 'catalogo_celular:agregar_cliente' %}">Agregar un cliente</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="{% url 'catalogo_celular:agregar_producto' %}">Agregar un producto</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="{% url 'catalogo_celular:agregar_compra' %}">Agregar una compra</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="{% url "logout" %}">Logout</a>
-                </li>
-                {% else %}
-                <li class="nav-item">
-                  <a class="nav-link" href="{% url "catalogo_celular:login" %}">Login</a>
-                </li>
-              </ul>
-              {% endif %}
-            </div>
-          </div>
-          </div>
-        </nav>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-5">
+      <div class="container">
+        <a class="navbar-brand" href="{% url 'catalogo_celular:index' %}">Inicio</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link {% if request.resolver_match.url_name == 'productos' %}active{% endif %}" href="{% url 'catalogo_celular:productos' %}">Productos</a>
+            </li>
+            {% if user.is_authenticated %}
+              <li class="nav-item">
+                <a class="nav-link {% if request.resolver_match.url_name == 'compras' %}active{% endif %}" href="{% url 'catalogo_celular:compras' %}">Compras</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link {% if request.resolver_match.url_name == 'clientes' %}active{% endif %}" href="{% url 'catalogo_celular:clientes' %}">Clientes</a>
+              </li>
+              <hr class="dropdown-divider me-5">
+              <li class="nav-item">
+                <a class="nav-link {% if request.resolver_match.url_name == 'agregar_cliente' %}active{% endif %}" href="{% url 'catalogo_celular:agregar_cliente' %}">Agregar un cliente</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link {% if request.resolver_match.url_name == 'agregar_producto' %}active{% endif %}" href="{% url 'catalogo_celular:agregar_producto' %}">Agregar un producto</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link {% if request.resolver_match.url_name == 'agregar_compra' %}active{% endif %}" href="{% url 'catalogo_celular:agregar_compra' %}">Agregar una compra</a>
+              </li>
+            {% endif %}
+          </ul>
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            {% if user.is_authenticated %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+              </li>
+            {% else %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'catalogo_celular:login' %}">Login</a>
+              </li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </nav>
         
     <div class="container bg-body-secondary mb-4">
       <div class="text-center py-4">

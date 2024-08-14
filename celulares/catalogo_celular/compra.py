@@ -2,7 +2,7 @@ class Carrito:
     def __init__(self, request) -> None:
         self.request = request
         self.session = request.session
-        compra = self.session["compra"]
+        compra = self.session.get("compra")
         if not compra:
             self.session["compra"] = {}
             self.compra = self.session["compra"]
@@ -15,16 +15,17 @@ class Carrito:
 
     def agregar(self, producto):
         id = str(producto.id)
+        price = float(producto.precio)
         if id not in self.compra.keys():
             self.compra[id] = {
                 "producto_id": producto.id,
                 "nombre": producto.nombre_producto,
-                "precio": producto.precio,
+                "precio": price,
                 "cantidad": 1,
             }
         else:
             self.compra[id]["cantidad"] += 1
-            self.compra[id]["acumulado"] += producto.precio
+            self.compra[id]["acumulado"] = self.compra[id].get("acumulado", 0) + price
 
         self.guardar_compra()
 

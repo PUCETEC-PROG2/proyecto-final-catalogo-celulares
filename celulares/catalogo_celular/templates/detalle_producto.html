@@ -2,6 +2,7 @@
 {% block title %}{{ producto }}{% endblock title %}
 {% block content %}
     <div class="container mb-4">
+        <a href="{% url 'catalogo_celular:productos' %}" class="btn btn-success"><i class="fa-solid fa-reply"></i></a>
         <h4 class="py-4">Detalles de <strong>{{ producto | capfirst }}</strong></h4>
         <div class="row">
             <div class="col-12 col-lg-7">
