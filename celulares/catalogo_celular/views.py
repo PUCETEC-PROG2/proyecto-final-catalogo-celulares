@@ -4,7 +4,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.template import loader
 
 from .forms import *
-
+from .compra import Carrito
 from .models import *
 
 # from pokedex.forms import PokemonFor
@@ -60,6 +60,29 @@ def agregar_producto(request):
         
     return render(request,"productos_form.html",{'form': form }) 
 
+def add_to_buy(request, id):
+    carrito = Carrito(request)
+    producto = Producto.objects.get(id=id)
+    carrito.agregar(producto)
+    return redirect('catalogo_celular:productos')
+
+def delete_to_buy(request, id):
+    carrito = Carrito(request)
+    producto = Producto.objects.get(id=id)
+    carrito.eliminar_compra(producto)
+    return redirect('catalogo_celular:productos')
+
+def subtract_to_buy(request, id):
+    carrito = Carrito(request)
+    producto = Producto.objects.get(id=id)
+    carrito.restar(producto)
+    return redirect('catalogo_celular:productos')
+
+def clean_to_buy(request):
+    carrito = Carrito(request)
+    carrito.limpiar()
+    return redirect('catalogo_celular:productos')
+
 def editar_producto(request, id):
     producto = get_object_or_404(Producto, pk = id)
     if request.method == 'POST':
@@ -87,16 +110,18 @@ def compras(request):
 
 #@login_required    
 def agregar_compra(request):
-    if request.method=='POST':
-        form= CompraForm(request.POST ,request.FILES)
-        if form.is_valid():
-            form.save()
-            return redirect('catalogo_celular:compras')
-        
-    else:   
-        form = CompraForm()
-        
-    return render(request,"compras_form.html",{'form': form }) 
+    productos = Producto.objects
+    context = {
+        'productos': productos
+    }
+    return render(request, 'buy.html', context)
+
+def checkout(request):
+    compra = Compra.objects
+    context = {
+        'compra': compra 
+    }
+    return render(request, 'checkout.html', context)
 
 
 def clientes (request):
