@@ -5,7 +5,7 @@
         <div class="card">
             <div class="card-body ">
                 <div class="table-responsive">
-                    <table class="table table-bordered align-middle">
+                    <table class="table table-bordered align-middle cell-border compact stripe" id="tbl_clientes">
                     <thead class="table-dark text-center">
                         <tr class="align-middle">
                         <th scope="col">ID</th>
@@ -47,9 +47,21 @@
             </div>
         </div>
     </div>
+    {% block extra_js %}
     <script>
-        function confirmarEliminacion() {
-            return confirm('¿Estás seguro de que deseas eliminar este cliente?');
-        }
+    $(document).ready(function() {
+        $('#tbl_clientes').DataTable({
+            language: {
+                url: 'https://cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json'
+            },
+            responsive: true,
+            order: []
+        });
+        
+    });
+    function confirmarEliminacion() {
+        return confirm('¿Estás seguro de que deseas eliminar este cliente?');
+    }
     </script>
+    {% endblock extra_js %}
 {% endblock content %}
